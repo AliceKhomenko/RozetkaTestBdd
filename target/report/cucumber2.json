@@ -1,0 +1,65 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "line": 4,
+        "name": "",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": [
+          {
+            "result": {
+              "duration": 22180729523,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "a Chrome browser is opened",
+            "match": {
+              "location": "MyStepdefs.openBrowser()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 28392638979,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "Rozetka site is opened",
+            "match": {
+              "location": "MyStepdefs.rozetkaSiteIsOpened()"
+            },
+            "keyword": "And "
+          }
+        ]
+      },
+      {
+        "line": 8,
+        "name": "Get differences between two notebooks",
+        "description": "",
+        "id": "differences;get-differences-between-two-notebooks",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "status": "undefined"
+            },
+            "line": 9,
+            "name": "smthing",
+            "match": {},
+            "keyword": "Given "
+          }
+        ]
+      }
+    ],
+    "name": "Differences",
+    "description": "  As a user, I want to get correct info about differences between two products",
+    "id": "differences",
+    "keyword": "Feature",
+    "uri": "src/test/java/cucumber/ui/features/RozetkaTest.feature",
+    "tags": []
+  }
+]
