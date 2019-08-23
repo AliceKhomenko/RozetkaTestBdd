@@ -7,13 +7,13 @@ import ru.yandex.qatools.ashot.Screenshot;
 import javax.imageio.ImageIO;
 import java.io.File;
 
-public class Screen {
-    WebDriver driver;
+public class Screen{
     String feature;
     String scenario;
+    WebDriver driver;
+
     public Screen(WebDriver driver){
         this.driver=driver;
-
     }
 
     public void setPath(String feature,String scenario){

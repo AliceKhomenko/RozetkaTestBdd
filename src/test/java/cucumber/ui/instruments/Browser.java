@@ -11,11 +11,19 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class Browser {
+    private static Browser instance;
     Properties prop = new Properties();
+    protected WebDriver driver;
 
+    protected Browser(){}
+    public static Browser getInstance(){
+        if(instance == null){		//если объект еще не создан
+            instance = new Browser();
+    }
+    return instance;
+    }
 
     public WebDriver init(String browserName) {
-        WebDriver driver = null;
         OSDetector();
         switch (browserName.toLowerCase()) {
             case "chrome":
