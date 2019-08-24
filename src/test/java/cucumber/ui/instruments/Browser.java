@@ -15,7 +15,7 @@ public class Browser {
     Properties prop = new Properties();
     protected WebDriver driver;
 
-    protected Browser(){}
+    private Browser(){}
     public static Browser getInstance(){
         if(instance == null){		//если объект еще не создан
             instance = new Browser();
@@ -87,4 +87,7 @@ public class Browser {
     }
 
 
+    public WebDriver getDriver() {
+        return this.driver;
+    }
 }

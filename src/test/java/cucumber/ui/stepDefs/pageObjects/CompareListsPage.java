@@ -10,17 +10,17 @@ public class CompareListsPage {
     final WebDriver driver;
     private WebDriverWait wait;
 
-    @FindBy(xpath="//*[contains(text(),'Сравнить эти товары')]")
+    @FindBy(xpath = "//*[contains(text(),'Сравнить эти товары')]")
     public WebElement compareButton;
 
 
-    public CompareListsPage(WebDriver driver){
-        this.driver=driver;
-        PageFactory.initElements(driver,this);
-        wait = new WebDriverWait(driver,20);
+    public CompareListsPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        wait = new WebDriverWait(driver, 20);
     }
 
-    public CompareDetailsPage clickCompareButton(){
+    public CompareDetailsPage clickCompareButton() {
         compareButton.click();
         return new CompareDetailsPage(driver);
 

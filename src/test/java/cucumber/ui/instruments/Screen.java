@@ -41,7 +41,7 @@ public class Screen{
 
         ImageIO.write(screen1.getImage(), "PNG", new File("Screenshots/" + feature + "/" + scenario + ".png"));
     } catch (Exception e) {
-         new Browser().testFailed(e.toString());
+         Browser.getInstance().testFailed(e.toString());
     }
 
 }

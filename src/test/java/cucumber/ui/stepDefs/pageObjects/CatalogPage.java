@@ -12,25 +12,24 @@ public class CatalogPage {
     final WebDriver driver;
     WebDriverWait wait;
 
-    @FindBy(id="big-promo")
+    @FindBy(id = "big-promo")
     public WebElement promoBlock;
 
     @FindBy(css = "img[title='Ноутбуки с SSD']")
     public WebElement notebooksWithSSD;
 
-    public CatalogPage(WebDriver driver){
-        this.driver=driver;
-        PageFactory.initElements(driver,this);
-        wait=new WebDriverWait(driver,20);
+    public CatalogPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.visibilityOf(promoBlock));
     }
 
-    public ProductListPage selectInCatalog(String s){
-        WebElement element = driver.findElement(By.cssSelector("img[title='"+s+"']"));
+    public ProductListPage selectInCatalog(String s) {
+        WebElement element = driver.findElement(By.cssSelector("img[title='" + s + "']"));
         element.click();
-       return new ProductListPage(driver);
+        return new ProductListPage(driver);
     }
-
 
 
 }

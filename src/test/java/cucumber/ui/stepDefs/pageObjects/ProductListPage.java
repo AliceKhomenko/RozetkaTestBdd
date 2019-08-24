@@ -17,26 +17,23 @@ public class ProductListPage {
 
     @FindBy(css = ".g-i-tile.g-i-tile-catalog")
     public List<WebElement> products;
+
     public ProductListPage(WebDriver driver) {
-        this.driver=driver;
-        PageFactory.initElements(driver,this);
-        wait=new WebDriverWait(driver,20);
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        wait = new WebDriverWait(driver, 20);
 
     }
 
-    public void addToCompareList(int i){
+    public void addToCompareList(int i) {
         Actions actions = new Actions(driver);
         WebElement element;
-        List<WebElement> addedToCompare=driver.findElements(By.xpath("//img[contains(@alt,'Добавлено')]"));
-        System.out.println("added: "+addedToCompare);
-
-        System.out.println("size:"+products.size());
-        element = products.get(i-1);
-
-            actions.moveToElement(element).build().perform();
-            wait.until(ExpectedConditions.visibilityOf(element.findElement(By.cssSelector("div.short-description"))));
+        List<WebElement> addedToCompare = driver.findElements(By.xpath("//img[contains(@alt,'Добавлено')]"));
+        element = products.get(i - 1);
+        actions.moveToElement(element).build().perform();
+        wait.until(ExpectedConditions.visibilityOf(element.findElement(By.cssSelector("div.short-description"))));
 
         element.findElement(By.cssSelector("img.sprite.g-compare-icon")).click();
-        wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//img[contains(@alt,'Добавлено')]"),addedToCompare.size()));
+        wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//img[contains(@alt,'Добавлено')]"), addedToCompare.size()));
     }
 }

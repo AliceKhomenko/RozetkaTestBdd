@@ -11,18 +11,18 @@ public class Header {
     WebDriverWait wait;
 
 
-    @FindBy(id="comparison")
+    @FindBy(id = "comparison")
     private WebElement compareIcon;
 
-    public Header(WebDriver driver){
+    public Header(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver,this);
-        wait = new WebDriverWait(driver,20);
+        PageFactory.initElements(driver, this);
+        wait = new WebDriverWait(driver, 20);
     }
 
-    public ComparePage clickCompareElement(){
+    public CompareListsPage clickCompareElement() {
         compareIcon.click();
-        return new ComparePage(driver);
+        return new CompareListsPage(driver);
 
 
     }
