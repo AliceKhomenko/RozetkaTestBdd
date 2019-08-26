@@ -2,6 +2,7 @@ package cucumber.ui.stepDefs;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.ui.instruments.Browser;
 import cucumber.ui.stepDefs.pageObjects.*;
@@ -65,33 +66,41 @@ logger.info("open "+s+" browser");
         productListPage.addToCompareList(arg0);
     }
 
-    @And("^user clicks Compare icon$")
-    public void userClicksCompareIcon() throws Throwable {
+
+
+    @Then("^count of different rows is correct$")
+    public void userChecksDifferentRows() throws Throwable {
+        logger.info("check diffrent rows");
+        Assert.assertEquals(count, compareDetailsPage.checkOnlyDifferenrRows());
+    }
+
+
+    @And("^user clicks only different tabs$")
+    public void userClicksOnlyDifferentTabs() throws Throwable {
+        logger.info("click Tab \"Only different parameters\"");
+
+        compareDetailsPage.clickDifferentTab();
+    }
+
+    @And("^user clicks Compare icon on Header$")
+    public void userClicksCompareIconOnHeader() throws Throwable {
         logger.info("click compare icon in header");
         Header header = new Header(driver);
         header.clickCompareElement();
 
     }
 
-    @And("^user checks different rows$")
-    public void userChecksDifferentRows() throws Throwable {
-        logger.info("check diffrent rows");
-        Assert.assertEquals(count, compareDetailsPage.checkOnlyDifferenrRows());
-    }
-
-    @And("^user clicks Compare button$")
-    public void userClicksCompareButton() throws Throwable {
+    @And("^user clicks Compare button on Compare list$")
+    public void userClicksCompareButtonOnCompareList() throws Throwable {
         logger.info("click compare button for first products");
         compareListsPage = new CompareListsPage(driver);
         compareListsPage.clickCompareButton();
     }
 
-    @And("^user clicks only different tabs$")
-    public void userClicksOnlyDifferentTabs() throws Throwable {
-        logger.info("click Tab \"Only different parameters\"");
+    @And("^user gets different rows from all rows$")
+    public void userGetsAllRows() throws Throwable {
         compareDetailsPage = new CompareDetailsPage(driver);
         count = compareDetailsPage.getDiffrentRows();
         logger.info("different rows are "+count);
-        compareDetailsPage.clickDifferentTab();
     }
 }

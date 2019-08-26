@@ -11,7 +11,8 @@ Feature: Differences
     And user selects "Ноутбуки с SSD" on catalog page
     And user adds 1st product to compare list
     And user adds 2nd product to compare list
-    And user clicks Compare icon
-    And user clicks Compare button
+    And user clicks Compare icon on Header
+    And user clicks Compare button on Compare list
+    And user gets different rows from all rows
     And user clicks only different tabs
-    And user checks different rows
+    Then count of different rows is correct
