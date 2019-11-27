@@ -7,8 +7,6 @@ import cucumber.ui.instruments.Browser;
 import cucumber.ui.instruments.Screen;
 import org.openqa.selenium.WebDriver;
 
-import java.io.File;
-
 public class Hooks {
     Scenario scenario;
     String scenarioName;
@@ -17,9 +15,9 @@ public class Hooks {
     @Before
     public void setUp(Scenario scenario) {
         this.scenario = scenario;
-        scenarioName = getScenarioName(scenario);
-        featureName = getFeatureName(scenario);
-        deleteOldScreenshots();
+        scenarioName = Preparing.getScenarioName(scenario);
+        featureName = Preparing.getFeatureName(scenario);
+        Preparing.deleteOldScreenshots();
 
     }
 
@@ -36,34 +34,6 @@ public class Hooks {
         driver.quit();
     }
 
-    public String getFeatureName(Scenario scenario) {
-        return scenario.getUri()
-                .replaceAll("src/test/java/cucumber/ui/features/", "")
-                .replaceAll(".feature", "");
-    }
-
-    public String getScenarioName(Scenario scenario) {
-        return scenario.getName();
-    }
-
-    private void deleteOldScreenshots() {
-        try {
-            File featureDirectory = new File("Screenshots/" + featureName + "/");
-            if (featureDirectory.exists()) {
-
-                for (File f : featureDirectory.listFiles()) {
-                    if (f.getName().startsWith(scenarioName))
-                        f.delete();
-
-                }
-                if (featureDirectory.listFiles().length == 0)
-                    featureDirectory.delete();
-            }
-        } catch (Exception e) {
-            Browser.getInstance().testFailed(e.toString());
-
-        }
-    }
 
 }
 

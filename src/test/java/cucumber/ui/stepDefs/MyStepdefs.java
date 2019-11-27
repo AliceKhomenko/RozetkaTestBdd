@@ -18,73 +18,65 @@ public class MyStepdefs {
     ProductListPage productListPage;
     CompareListsPage compareListsPage;
     CompareDetailsPage compareDetailsPage;
+    CatalogPage catalogPage;
     WebDriver driver;
     int count;
-    String TEST_URL="https://rozetka.com.ua/";
+    String TEST_URL = "https://rozetka.com.ua/";
 
 
-    private static final Logger logger
-            = LoggerFactory.getLogger(MyStepdefs.class);
+    private static final Logger logger = LoggerFactory.getLogger(MyStepdefs.class);
+
+
     @Given("^a ([^\"]*) browser is opened$")
     public void openBrowser(String s) {
-logger.info("open "+s+" browser");
+
         driver = Browser.getInstance().init(s);
     }
 
     @And("^Rozetka site is opened$")
     public void rozetkaSiteIsOpened() throws Throwable {
-        logger.info("open site "+TEST_URL);
-        driver.get(TEST_URL);
+        Browser.open(TEST_URL);
     }
 
 
     @When("^user moves cursor to \"([^\"]*)\"$")
     public void userMovesCursorTo(String arg0) throws Throwable {
-        logger.info("move cursor to "+arg0);
-        mainPage = new MainPage(driver).selectInMainMenu(arg0);
-        //mainPage.waitForLoadPage()
-        //.selectInMainMenu(arg0);
+        mainPage = new MainPage(driver);
+        mainPage.waitForPageLoading().selectInMainMenu(arg0);
     }
 
     @And("^user clicks \"([^\"]*)\" on hidden menu$")
     public void userClicksOnHiddenMenu(String s) throws Throwable {
-        logger.info("click "+s);
         mainPage.selectInHiddenMenu(s);
     }
 
     @And("^user selects \"([^\"]*)\" on catalog page$")
     public void userSelectsOnCatalogPage(String arg0) throws Throwable {
-        logger.info("select "+arg0);
-        CatalogPage catalogPage = new CatalogPage(driver);
-        catalogPage.selectInCatalog(arg0);
+        catalogPage = new CatalogPage(driver);
+        catalogPage.waitForPageLoading().selectInCatalog(arg0);
     }
 
     @And("^user adds (\\d+).. product to compare list$")
     public void userAddsStProductToCompareList(int arg0) throws Throwable {
-        logger.info("user add "+arg0+" product to compare list");
         productListPage = new ProductListPage(driver);
         productListPage.addToCompareList(arg0);
     }
 
 
-
     @Then("^count of different rows is correct$")
     public void userChecksDifferentRows() throws Throwable {
-        logger.info("check diffrent rows");
         Assert.assertEquals(count, compareDetailsPage.checkOnlyDifferenrRows());
     }
 
 
     @And("^user clicks only different tabs$")
     public void userClicksOnlyDifferentTabs() throws Throwable {
-        logger.info("click Tab \"Only different parameters\"");
 
         compareDetailsPage.clickDifferentTab();
     }
 
     @And("^user clicks Compare icon on Header$")
     public void userClicksCompareIconOnHeader() throws Throwable {
-        logger.info("click compare icon in header");
         Header header = new Header(driver);
         header.clickCompareElement();
 
@@ -92,7 +84,6 @@ logger.info("open "+s+" browser");
 
     @And("^user clicks Compare button on Compare list$")
     public void userClicksCompareButtonOnCompareList() throws Throwable {
-        logger.info("click compare button for first products");
         compareListsPage = new CompareListsPage(driver);
         compareListsPage.clickCompareButton();
     }
@@ -101,6 +92,5 @@ logger.info("open "+s+" browser");
     public void userGetsAllRows() throws Throwable {
         compareDetailsPage = new CompareDetailsPage(driver);
         count = compareDetailsPage.getDiffrentRows();
-        logger.info("different rows are "+count);
     }
 }

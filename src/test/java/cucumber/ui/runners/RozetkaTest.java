@@ -8,7 +8,9 @@ import org.testng.annotations.Test;
         plugin = {"pretty","json:target/report/cucumber2.json"},
         strict = true,
         features = {"src/test/java/cucumber/ui/features/RozetkaTest.feature"},
-        glue = {"cucumber.ui.stepDefs"}
+        glue = {"cucumber.ui.stepDefs"},
+        monochrome=true
+
 )
 
 

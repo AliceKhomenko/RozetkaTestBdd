@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -13,7 +15,9 @@ import java.util.concurrent.TimeUnit;
 public class Browser {
     private static Browser instance;
     Properties prop = new Properties();
-    protected WebDriver driver;
+    protected static WebDriver driver;
+    private static final Logger logger
+            = LoggerFactory.getLogger(Browser.class);
 
     private Browser(){}
     public static Browser getInstance(){
@@ -24,6 +28,7 @@ public class Browser {
     }
 
     public WebDriver init(String browserName) {
+        logger.info("open "+browserName+" browser");
         OSDetector();
         switch (browserName.toLowerCase()) {
             case "chrome":
@@ -89,5 +94,11 @@ public class Browser {
 
     public WebDriver getDriver() {
         return this.driver;
+    }
+
+    public static void open(String s) {
+        logger.info("open site "+s);
+        driver.get(s);
+
     }
 }

@@ -8,12 +8,17 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class ProductListPage {
     final WebDriver driver;
     WebDriverWait wait;
+
+    private static final Logger logger
+            = LoggerFactory.getLogger(ProductListPage.class);
 
     @FindBy(css = ".g-i-tile.g-i-tile-catalog")
     public List<WebElement> products;
@@ -26,6 +31,8 @@ public class ProductListPage {
     }
 
     public void addToCompareList(int i) {
+        logger.info("user add "+i+" product to compare list");
+
         Actions actions = new Actions(driver);
         WebElement element;
         List<WebElement> addedToCompare = driver.findElements(By.xpath("//img[contains(@alt,'Добавлено')]"));

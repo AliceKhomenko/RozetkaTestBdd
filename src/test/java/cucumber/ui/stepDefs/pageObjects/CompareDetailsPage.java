@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,6 +16,9 @@ import java.util.List;
 public class CompareDetailsPage {
     private final WebDriver driver;
     WebDriverWait wait;
+
+    private static final Logger logger
+            = LoggerFactory.getLogger(CompareDetailsPage.class);
 
     @FindBy(css = ".comparison-t-row")
     public List<WebElement> rows;
@@ -43,15 +48,21 @@ public class CompareDetailsPage {
                 set.add(list.get(j).getText());
             if (set.size() > 1) differentRows += 1;
         }
+        logger.info("different rows are "+differentRows);
+
         return differentRows;
     }
 
 
     public void clickDifferentTab() {
+        logger.info("click Tab \"Only different parameters\"");
+
         differencesTab.click();
     }
 
     public int checkOnlyDifferenrRows() {
+        logger.info("check diffrent rows");
+
         int count = 0;
         for (WebElement el : rows) {
             if (el.isDisplayed()) count++;
